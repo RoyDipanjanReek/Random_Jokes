@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: blanchedalmond;">
+    <h1 style="text-align: center;">Random Jokes</h1>
+
+    <div style="height: 200px; background-color: #fff;">
+        <p id="jokes"></p>
+        <button id="btn" style="align-self: center; margin-top: 30px; margin-left: 50%;">Change Jokes</button>
+    </div>
+
+</body>
+<script>
+    const button = document.querySelector('#btn')
+    const jokes = document.getElementById('jokes')
+
+    function getRandomJokes(){
+        fetch('https://official-joke-api.appspot.com/random_joke')
+        .then((response) => {
+        return response.json();
+        })
+        .then((data) => {
+           jokes.innerHTML = `
+           ${data.setup}
+           ${data.punchline}
+           `
+
+    })
+        .catch((error) => console.log(error))
+    }
+
+
+    button.addEventListener('click',getRandomJokes)
+</script>
+
+</html>
